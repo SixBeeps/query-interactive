@@ -30,7 +30,7 @@ export default function App() {
     <>
       <div className="width-overlay">
         <h2>Screen too small</h2>
-        <p>Please use a display with a width greater than 560px</p>
+        <p>Please use a display with a width greater than 700px</p>
       </div>
       <div className="App" style={insaneMode ? insanityTheme : regularTheme}>
         <QueryDisplay query={query} ref={me => setQueryDisplay(me)}/>

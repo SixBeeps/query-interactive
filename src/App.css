@@ -21,7 +21,7 @@
 }
 
 /* CSS rule that only shows if the viewport width is less than 560px */
-@media (max-width: 560px) {
+@media (max-width: 700px) {
   .width-overlay {
     position: fixed;
     display: flex;
@@ -40,7 +40,7 @@
 }
 
 /* CSS rule that only shows if the viewport width is greater than 560px */
-@media (min-width: 560px) {
+@media (min-width: 700px) {
   .width-overlay {
     display: none;
   }
