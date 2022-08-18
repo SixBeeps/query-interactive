@@ -79,7 +79,7 @@
   image-rendering: pixelated;
 }
 
-.query-button-image:hover {
+.query-button > button:hover .query-button-image {
   filter: invert(1);
 }
 
