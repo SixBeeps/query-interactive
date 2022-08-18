@@ -13,7 +13,7 @@ export default class QueryToken extends React.Component {
 	animate() {
 		clearTimeout(this.state.timeout);
 		this.setState({
-			visible: false,
+			visible: this.props.idx === 0, // Skip setting first token as invisible to prevent 1ms "flash" from happening
 			timeout: setTimeout(() => {
 				this.setState({
 					visible: true

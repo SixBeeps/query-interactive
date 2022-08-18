@@ -27,31 +27,37 @@ export default function App() {
   const [insaneMode, setInsaneMode] = React.useState(false);
 
   return (
-    <div className="App" style={insaneMode ? insanityTheme : regularTheme}>
-      <QueryDisplay query={query} ref={me => setQueryDisplay(me)}/>
-      <InsanityButton onClick={() => {
-        setInsaneMode(true);
-        audioManager.play("insane");
-        queuedQuery = generateRandomQuery(true);
-      }}/>
-      <QueryButton onClick={() => {
-        switch(queuedQuery[queuedQuery.length - 1]) {
-          case Tokens.Yes:
-            audioManager.play("good");
-            break;
-          case Tokens.No:
-            audioManager.play("bad");
-            break;
-          case Tokens.Question:
-            audioManager.play("question");
-            break;
-        }
+    <>
+      <div className="width-overlay">
+        <h2>Screen too small</h2>
+        <p>Please use a display with a width greater than 560px</p>
+      </div>
+      <div className="App" style={insaneMode ? insanityTheme : regularTheme}>
+        <QueryDisplay query={query} ref={me => setQueryDisplay(me)}/>
+        <InsanityButton onClick={() => {
+          setInsaneMode(true);
+          audioManager.play("insane");
+          queuedQuery = generateRandomQuery(true);
+        }}/>
+        <QueryButton onClick={() => {
+          switch(queuedQuery[queuedQuery.length - 1]) {
+            case Tokens.Yes:
+              audioManager.play("good");
+              break;
+            case Tokens.No:
+              audioManager.play("bad");
+              break;
+            case Tokens.Question:
+              audioManager.play("question");
+              break;
+          }
 
-        setQuery(queuedQuery);
-        queuedQuery = generateRandomQuery(insaneMode);
-        queryDisplay.animate();
-      }} />
-      <AudioManager ref={me => setAudioManager(me)}/>
-    </div>
+          setQuery(queuedQuery);
+          queuedQuery = generateRandomQuery(insaneMode);
+          queryDisplay.animate();
+        }} />
+        <AudioManager ref={me => setAudioManager(me)}/>
+      </div>
+    </>
   );
 }
