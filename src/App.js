@@ -1,25 +1,57 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import QueryDisplay from './components/QueryDisplay';
+import QueryButton from './components/QueryButton';
+import { Tokens, generateRandomQuery } from './helpers/QueryData';
+import AudioManager from './components/AudioManager';
+import InsanityButton from './components/InsanityButton';
 
-function App() {
+// Keep a query queued to be pushed to the query state
+// This needs to be done because the query state is updated asynchronously
+let queuedQuery = generateRandomQuery(false);
+
+const regularTheme = {
+  backgroundColor: 'white',
+  filter: 'invert(0)'
+}
+
+const insanityTheme = {
+  backgroundColor: 'white',
+  filter: 'invert(1)'
+}
+
+export default function App() {
+  const [query, setQuery] = React.useState(generateRandomQuery());
+  const [queryDisplay, setQueryDisplay] = React.useState([]);
+  const [audioManager, setAudioManager] = React.useState(null);
+  const [insaneMode, setInsaneMode] = React.useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={insaneMode ? insanityTheme : regularTheme}>
+      <QueryDisplay query={query} ref={me => setQueryDisplay(me)}/>
+      <InsanityButton onClick={() => {
+        setInsaneMode(true);
+        audioManager.play("insane");
+        queuedQuery = generateRandomQuery(true);
+      }}/>
+      <QueryButton onClick={() => {
+        switch(queuedQuery[queuedQuery.length - 1]) {
+          case Tokens.Yes:
+            audioManager.play("good");
+            break;
+          case Tokens.No:
+            audioManager.play("bad");
+            break;
+          case Tokens.Question:
+            audioManager.play("question");
+            break;
+        }
+
+        setQuery(queuedQuery);
+        queuedQuery = generateRandomQuery(insaneMode);
+        queryDisplay.animate();
+      }} />
+      <AudioManager ref={me => setAudioManager(me)}/>
     </div>
   );
 }
-
-export default App;
