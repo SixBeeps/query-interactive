@@ -22,7 +22,10 @@ export default class AudioManager extends React.Component {
 	}
 
 	play(sound) {
-		this.sounds[sound].stop();
+		Object.keys(this.sounds).forEach(s => {
+			if (s === undefined) return;
+			this.sounds[s].stop();
+		})
 		this.sounds[sound].play();
 	}
 
