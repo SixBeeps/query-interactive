@@ -79,7 +79,7 @@
   image-rendering: pixelated;
 }
 
-.query-button > button:hover .query-button-image {
+.query-button:hover .query-button-image {
   filter: invert(1);
 }
 
@@ -91,7 +91,7 @@
   user-select: none;
 }
 
-.insanity-button > button{
+.insanity-button > button {
   width: 8px;
   height: 14px;
   border: none;
