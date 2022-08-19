@@ -24,7 +24,7 @@ export default class QueryToken extends React.Component {
 	
 	render() {
 		return (
-			<img src={TokenToImage[this.props.token]} className="query-token" style={{opacity: this.state.visible ? 1 : 0}}></img>
+			<img src={TokenToImage[this.props.token]} className="query-token" style={{opacity: this.state.visible ? 1 : 0}} alt="Token"></img>
 		)
 	}
 }

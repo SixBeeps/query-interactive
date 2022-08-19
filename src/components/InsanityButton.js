@@ -10,7 +10,7 @@ export default function InsanityButton(props) {
 				props.onClick();
 				setActive(true);
 			}}>
-				<img src={Question} className="insanity-button-image" />
+				<img src={Question} className="insanity-button-image" alt="?" />
 			</button>
 		</div>
 	)
